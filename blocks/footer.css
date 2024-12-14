@@ -1,0 +1,12 @@
+.footer {
+  background-color: #fcf5ef;
+}
+
+.footer__content {
+  margin: 0 auto;
+  padding: 60px 668px;
+  width: 104px;
+  height: 16px;
+  color: #212121;
+  opacity: 70%;
+}
