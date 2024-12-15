@@ -18,5 +18,4 @@ This website is an adaptive webpage thanks to the use of HTML and CSS responsive
 
 This webpage is deployed using a deployment link that is connected to GitHub pages.
 
-- Deployment Link:
-  https://everlinh562.github.io/se_project_spots
+- [Deployment Link] (https://everlinh562.github.io/se_project_spots)
