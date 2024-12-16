@@ -19,3 +19,9 @@ This website is an adaptive webpage thanks to the use of HTML and CSS responsive
 This webpage is deployed using a deployment link that is connected to GitHub pages.
 
 - [Deployment Link] (https://everlinh562.github.io/se_project_spots)
+
+## Video
+
+This video goes over the creation of the responsive page layout.
+
+-[video link] (https://drive.google.com/file/d/1GAMH87T4QbGSKvauZ1rtMhu35FuFz8HL/view?usp=drive_link)
