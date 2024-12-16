@@ -17,6 +17,7 @@
 }
 
 .profile__name {
+  color: #212121;
   margin: 0 0 12px;
   font-size: 32px;
   font-weight: 500;
@@ -30,6 +31,8 @@
 }
 
 .profile__description {
+  color: #212121;
+  opacity: 70%;
   margin: 0;
   font-size: 16px;
   font-weight: 500;
@@ -43,10 +46,11 @@
 }
 
 .profile__edit-btn {
+  display: flex;
+  gap: 8px;
   margin-top: auto;
   padding: 0;
   border: none;
-  border-radius: 90px;
   gap: 8px;
   background-color: transparent;
   opacity: 70%;
@@ -57,14 +61,16 @@
 }
 
 .profile__add-btn {
-  margin-top: 138px;
-  margin-bottom: 20px;
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
   margin-left: auto;
+  border: none;
   border-radius: 8px;
   padding: 18px 32px;
   gap: 8px;
   background-color: #212121;
-  color: #fff;
+  color: #fcf5e5;
   font-size: 16px;
   line-height: 1;
   font-weight: 500;

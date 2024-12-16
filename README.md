@@ -1,10 +1,10 @@
-# Project 3: Spots
+# Spots
 
 A Web responsive website.
 
 ## Description
 
-This website is an adaptive webpage thanks to the use of HTML and CSS responsive layouts. The responsive layouts ensures this webpage adapts to different screen sizes so the page looks great on all screens.
+This website is an adaptive webpage thanks to the use of HTML and CSS responsive layouts. The responsive layouts ensures this webpage adapts to different screen sizes so the page looks great on all screens. To achieve the different screen adaptability I used a combination of technologies such as HTML, CSS and Figma. The viewpoet and device width is set in the HTML structure. While CSS allows developers to set the responsive layout via display grid and media queries. Figma provided the various screen sizes and layouts for each element that is used when designing the CSS responsive layout.
 
 ## Tech Stack
 
