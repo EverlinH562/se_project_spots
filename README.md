@@ -24,4 +24,4 @@ This webpage is deployed using a deployment link that is connected to GitHub pag
 
 This video goes over the creation of the responsive page layout.
 
--[video link] (https://drive.google.com/file/d/1GAMH87T4QbGSKvauZ1rtMhu35FuFz8HL/view?usp=drive_link)
+-[video link] (https://drive.google.com/file/d/1GAMH87T4QbGSKvauZ1rtMhu35FuFz8HL/view?usp=sharing)
