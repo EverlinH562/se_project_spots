@@ -43,6 +43,39 @@
   opacity: 1;
 }
 
+.card__like-button_liked {
+  background-image: url(../images/Liked.png);
+  opacity: 1;
+}
+
+.card__like-button_liked:hover {
+  background-image: url(../images/Liked-hover.png);
+}
+
+.card__image-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.card__delete-button {
+  position: absolute;
+  width: 100%;
+  background-image: url(../images/Delete-default.png);
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: transparent;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.card__delete-button:hover {
+  background-image: url(../images/Delete-hover.png);
+  opacity: 1;
+}
+
 @media screen and (max-width: 627px) {
   .card__image {
     height: 288px;
