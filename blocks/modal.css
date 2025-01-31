@@ -121,6 +121,19 @@
   border: 1px solid #212121;
 }
 
+.modal__input_state_error {
+  border: 1px solid #ff000099;
+}
+
+.modal__error {
+  display: block;
+  color: #ff0000b2;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 17.6px;
+  text-align: left;
+}
+
 .modal__submit-btn {
   width: 156px;
   padding: 18px 0;
@@ -131,6 +144,10 @@
   background-color: #212121;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.modal__submit-btn-disabled {
+  opacity: 50%;
 }
 
 .modal__caption {
