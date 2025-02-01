@@ -2,7 +2,7 @@ const settings = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__submit-btn",
-  inactiveButtonClass: "modal__submit-btn-disabled",
+  inactiveButtonClass: "modal__submit-btn_disabled",
   inputErrorClass: "modal__input_state_error",
   errorClass: "modal__error",
 };
@@ -13,10 +13,10 @@ const showInputError = (formElement, inputElement, errorMessage, config) => {
   inputElement.classList.add(config.inputErrorClass);
 };
 
-const hideInputError = (formElement, inputElement, config) => {
+const hideInputError = (formElement, inputElement) => {
   const errorMessageEl = formElement.querySelector(`#${inputElement.id}-error`);
   errorMessageEl.textContent = "";
-  inputElement.classList.remove(config.inputErrorClass);
+  inputElement.classList.remove("modal__input_state_error");
 };
 
 const checkInputValidity = (formElement, inputElement, config) => {
@@ -51,6 +51,12 @@ const disabledButton = (buttonElement, config) => {
   buttonElement.classList.add(config.inactiveButtonClass);
 };
 
+const resetValidation = (formElement, inputElement) => {
+  inputElement.forEach((inputElement) => {
+    hideInputError(formElement, inputElement);
+  });
+};
+
 const setEventListeners = (formElement, config) => {
   const inputList = Array.from(
     formElement.querySelectorAll(config.inputSelector)
@@ -74,23 +80,3 @@ const enableValidation = (config) => {
   });
 };
 enableValidation(settings);
-
-document.addEventListener("keydown", function (evt) {
-  if (evt.key === "Escape") {
-    const modal = document.querySelector(".modal_opened");
-    if (modal) {
-      modal.classList.remove("modal_opened");
-    }
-  }
-});
-
-function OverlayClick(modal) {
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      closeModal(modal);
-    }
-  });
-}
-[editModal, cardModal, previewModal].forEach((modal) => {
-  OverlayClick(modal);
-});
