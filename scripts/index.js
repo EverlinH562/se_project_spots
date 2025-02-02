@@ -115,7 +115,11 @@ function handleAddCardSumbmit(evt) {
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
-  resetValidation(editModal, [editModalNameInput, editModalDescriptionInput]);
+  resetValidation(
+    editModal,
+    [editModalNameInput, editModalDescriptionInput],
+    settings
+  );
   openModal(editModal);
 });
 
@@ -162,7 +166,7 @@ function openModal(modal) {
   document.addEventListener("keydown", handleEscape);
 }
 
-function closeModal(modal) {
+function closeModal() {
   modals.forEach((modal) => {
     modal.classList.remove("modal_opened");
   });
