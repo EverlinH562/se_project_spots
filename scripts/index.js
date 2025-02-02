@@ -95,14 +95,6 @@ function getCardElement(data) {
   return cardElement;
 }
 
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-}
-
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-}
-
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = editModalNameInput.value;
@@ -146,6 +138,8 @@ initialCards.forEach((item) => {
   cardsList.prepend(cardElement);
 });
 
+const modals = [editModal, cardModal, previewModal];
+
 function closeOnOverlayClick(modal) {
   modal.addEventListener("click", (evt) => {
     if (evt.target === modal) {
@@ -153,13 +147,13 @@ function closeOnOverlayClick(modal) {
     }
   });
 }
-[editModal, cardModal, previewModal].forEach((modal) => {
+modals.forEach((modal) => {
   closeOnOverlayClick(modal);
 });
 
 function handleEscape(evt) {
   if (evt.key === "Escape") {
-    closeModal(editModal, cardModal, previewModal);
+    closeModal(modals);
   }
 }
 
@@ -169,8 +163,8 @@ function openModal(modal) {
 }
 
 function closeModal(modal) {
-  [editModal, cardModal, previewModal].forEach((modal) => {
-    if (modal) modal.classList.remove("modal_opened");
+  modals.forEach((modal) => {
+    modal.classList.remove("modal_opened");
   });
   document.removeEventListener("keydown", handleEscape);
 }

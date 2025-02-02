@@ -13,10 +13,10 @@ const showInputError = (formElement, inputElement, errorMessage, config) => {
   inputElement.classList.add(config.inputErrorClass);
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, config) => {
   const errorMessageEl = formElement.querySelector(`#${inputElement.id}-error`);
   errorMessageEl.textContent = "";
-  inputElement.classList.remove("modal__input_state_error");
+  inputElement.classList.remove(config.inputErrorClass);
 };
 
 const checkInputValidity = (formElement, inputElement, config) => {
@@ -53,7 +53,7 @@ const disabledButton = (buttonElement, config) => {
 
 const resetValidation = (formElement, inputElement) => {
   inputElement.forEach((inputElement) => {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   });
 };
 
