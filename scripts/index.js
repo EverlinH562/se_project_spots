@@ -166,9 +166,7 @@ function openModal(modal) {
   document.addEventListener("keydown", handleEscape);
 }
 
-function closeModal() {
-  modals.forEach((modal) => {
-    modal.classList.remove("modal_opened");
-  });
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscape);
 }
