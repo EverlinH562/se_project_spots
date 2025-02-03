@@ -157,7 +157,7 @@ modals.forEach((modal) => {
 
 function handleEscape(evt) {
   if (evt.key === "Escape") {
-    closeModal(modals);
+    modals.forEach(closeModal);
   }
 }
 
