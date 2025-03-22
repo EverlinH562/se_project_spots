@@ -20,18 +20,22 @@ class Api {
         });
     }
 
-    //implement POST/cards
-    // getUserInfo(){
-    //   return fetch(`${this._baseUrl}/users/me`, { 
-    //     headers: this._headers,
-    // })
-    // .then((res) => {
-    //     if (res.ok) {
-    //         return res.json()
-    //     }
-    //     Promise.reject(`Error: ${res.status}`);
-    // });
-    // }
+    createCard({name, link}){
+      return fetch(`${this._baseUrl}/cards`, { 
+        method: "POST",
+        headers: this._headers,
+        body: JSON.stringify({
+          name: name,
+          link: link,
+        }),
+    })
+    .then((res) => {
+        if (res.ok) {
+            return res.json()
+        }
+        Promise.reject(`Error: ${res.status}`);
+    });
+    }
 
     getUserInfo(){
       return fetch(`${this._baseUrl}/users/me`, { 
@@ -76,18 +80,31 @@ class Api {
     });
     }
 
-    deleteCard(id) {
-      return fetch(`${this._baseUrl}/cards/${id}`, {
+    deleteCard(cardId) {
+      return fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: "DELETE",
         headers: this._headers,
       }).then((res) => {
-        console.log("API Response:", res);  
         if (res.ok) {
           return res.json();
         }
         return Promise.reject(`Error: ${res.status}`);
       });
     }
+
+    handleLikeStatus(cardId, isLiked) {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        method: isLiked ? "DELETE": "PUT",
+        headers: this._headers,
+      }).then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+         Promise.reject(`Error: ${res.status}`);
+      });
+    }
+
+    
 }
 
 export default Api;
