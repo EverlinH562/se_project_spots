@@ -112,7 +112,7 @@ const cardLinkInput = cardModal.querySelector("#add-card-link-input");
 const avatarModal = document.querySelector("#avatar-modal");
 const avatarForm = avatarModal.querySelector(".modal__form");
 const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
-const avatarDeletetBtn = avatarModal.querySelector(".modal__submit-btn_delete");
+const avatarDeletetBtn = document.querySelector(".modal__submit-btn_delete");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
 const avatarInput = avatarModal.querySelector("#profile-avatar-input");
 
@@ -182,7 +182,7 @@ function getCardElement(data) {
 
  
 
-function handleDeleteCard(cardElement, cardId, avatarDeletetBtn) {
+function handleDeleteCard(cardElement, cardId, cardDeleteBtn) {
   selectedCard = cardElement;
   selectedCardId = cardId;
   openModal(deleteModal);
@@ -194,18 +194,21 @@ function handleDeleteSubmit(evt) {
   evt.preventDefault();
 
   if (avatarDeletetBtn) {
-    setButtonText(avatarDeletetBtn, true, "Delete", "Deleting..."); 
+    setButtonText(avatarDeletetBtn, true, "Delete", "Deleting...");
   }
 
-  api.deleteCard(selectedCardId)
+  api
+    .deleteCard(selectedCardId)
     .then(() => {
       selectedCard.remove();
-      setButtonText(avatarDeletetBtn, false, "Delete", "Deleting..."); 
+      
       closeModal(deleteModal);
     })
     .catch((err) => {
       console.error(err);
-      setButtonText(avatarDeletetBtn, false, "Delete", "Deleting..."); 
+    })
+    .finally(() => {
+      setButtonText(avatarDeletetBtn, false, "Delete", "Deleting...");
     });
 }
 
