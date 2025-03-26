@@ -200,7 +200,10 @@ function handleEditFormSubmit(evt) {
   const submitButton = evt.submitter;
   setButtonText(submitButton, true, "Save", "Saving...");
 
-  const updatedUserInfo = { name: editModalNameInput.value };
+  const updatedUserInfo = { 
+    name: editModalNameInput.value,
+    about: profileDescription.textContent 
+  };
 
   api.editUserInfo(updatedUserInfo)
     .then((data) => {
