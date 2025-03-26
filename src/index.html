@@ -57,16 +57,18 @@
       <div class="modal" id="edit-modal">
         <div class="modal__container">
           <button type="button" class="modal__close-btn"></button>
-          <h3 class="modal__title">Edit profile avatar</h3>
+          <h3 class="modal__title">Edit profile</h3>
           <form id="edit-profile-form" class="modal__form" novalidate>
             <label for="profile-name-input" class="modal__label">
-              Profile Picture
+              Edit Profile avatar
               <input
                 id="profile-name-input"
-                name="link"
-                type="url"
+                name="name"
+                type="text"
                 class="modal__input"
-                placeholder="Paste image link here"
+                placeholder="Type your name"
+                minlength="2"
+                maxlength="40"
                 required
               />
               <span id="profile-name-input-error" class="modal__error"></span>
