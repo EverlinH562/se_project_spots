@@ -12,6 +12,7 @@ import unionIcon from "../images/Union.svg";
 import Api from "../utils/Api.js";
 import { setButtonText } from "../utils/helper.js";
 
+
 const avatarImage = document.getElementById("avatar");
 avatarImage.src = avatar;
 const logoImage = document.getElementById("logo");
@@ -194,30 +195,29 @@ function handleDeleteSubmit(evt) {
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
   const profileSubmitBtn = evt.submitter;
-
+  profileSubmitBtn.disabled = true;
+  profileSubmitBtn.classList.add("modal__submit-btn_disabled");
   setButtonText(profileSubmitBtn, true, "Save", "Saving...");
 
-  const updatedUserInfo = { 
+  const updatedUserInfo = {
     name: editModalNameInput.value,
-    about: editModalAboutInput.value 
+    about: editModalAboutInput.value
   };
 
-  api.editUserInfo(updatedUserInfo)  
+  api.editUserInfo(updatedUserInfo)
     .then((data) => {
       profileName.textContent = data.name;
       profileDescription.textContent = data.about;
-      editFormElement.reset();
-      closeModal(editModal);
-
-      api.getAppInfo()
-        .then(([cards, userInfo]) => {
-          profileName.textContent = userInfo.name;
-          profileDescription.textContent = userInfo.about;
-        })
-        .catch(console.error);
+      closeModal(editModal);  
+      profileSubmitBtn.disabled = false;
+      profileSubmitBtn.classList.remove("modal__submit-btn_disabled");
+      setButtonText(profileSubmitBtn, false, "Save");  
+      editFormElement.reset();  
     })
-    .catch(console.error)
-    .finally(() => {
+    .catch((error) => {
+      console.error(error);
+      profileSubmitBtn.disabled = false;
+      profileSubmitBtn.classList.remove("modal__submit-btn_disabled");
       setButtonText(profileSubmitBtn, false, "Save");
     });
 }
@@ -227,12 +227,10 @@ function toggleSubmitButton() {
   cardSubmitBtn.disabled = !isInputValid; 
 }
 
-cardNameInput.addEventListener("input", toggleSubmitButton);
-cardLinkInput.addEventListener("input", toggleSubmitButton);
-
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
   cardSubmitBtn.disabled = true; 
+  cardSubmitBtn.classList.add("modal__submit-btn_disabled");
   setButtonText(cardSubmitBtn, true, "Save", "Saving...");
 
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
@@ -241,12 +239,16 @@ function handleAddCardSubmit(evt) {
     .then((data) => {
       const cardElement = getCardElement(data);
       cardsList.prepend(cardElement);
-      cardForm.reset(); 
       closeModal(cardModal); 
-      cardSubmitBtn.disabled = true; 
+      cardSubmitBtn.disabled = false;
+      cardSubmitBtn.classList.remove("modal__submit-btn_disabled");
+      setButtonText(cardSubmitBtn, false, "Save"); 
+      cardForm.reset();  
     })
-    .catch(console.error)
-    .finally(() => {
+    .catch((error) => {
+      console.error(error);
+      cardSubmitBtn.disabled = false;
+      cardSubmitBtn.classList.remove("modal__submit-btn_disabled");
       setButtonText(cardSubmitBtn, false, "Save"); 
     });
 }
@@ -255,21 +257,15 @@ function handleAvatarSubmit(evt) {
   evt.preventDefault();
   setButtonText(avatarSubmitBtn, true, "Save", "Saving...");
 
-  api.editAvatarInfo(avatarInput.value)  
+  api.editAvatarInfo(avatarInput.value)
     .then((data) => {
       avatarImage.src = data.avatar;
-      avatarForm.reset();
-      closeModal(avatarModal);
-
-      api.getAppInfo()
-        .then(([cards, userInfo]) => {
-          avatarImage.src = userInfo.avatar;  
-        })
-        .catch(console.error);  
+      closeModal(avatarModal); 
     })
-    .catch(console.error) 
+    .catch(console.error)
     .finally(() => {
-      setButtonText(avatarSubmitBtn, false, "Save");  
+      setButtonText(avatarSubmitBtn, false, "Save");
+      avatarForm.reset();  
     });
 }
 
@@ -286,9 +282,11 @@ modals.forEach((modal) => {
 
 function handleEscape(evt) {
   if (evt.key === "Escape") {
-    modals.forEach(closeModal);
+    document.querySelectorAll(".modal_opened").forEach((modal) => {
+      closeModal(modal);
+    });
   }
-}
+  }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -302,9 +300,10 @@ function closeModal(modal) {
 
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
+  editModalAboutInput.value = profileDescription.textContent; 
   resetValidation(
     editModal,
-    [editModalNameInput],
+    [editModalNameInput, editModalAboutInput], 
     settings
   );
   openModal(editModal);
@@ -359,14 +358,6 @@ document.querySelectorAll(".modal").forEach((modal) => {
       closeModal(modal);
     }
   });
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    document.querySelectorAll(".modal_opened").forEach((modal) => {
-      closeModal(modal);
-    });
-  }
 });
 
 enableValidation(settings);
