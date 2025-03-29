@@ -6,6 +6,10 @@ export const settings = {
   inputErrorClass: "modal__input_state_error",
   errorClass: "modal__error",
 };
+export const disabledButton = (buttonElement, config) => {
+  buttonElement.disabled = true;
+  buttonElement.classList.add(config.inactiveButtonClass);
+};
 
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorMessageEl = formElement.querySelector(`#${inputElement.id}-error`);
@@ -31,6 +35,7 @@ const checkInputValidity = (formElement, inputElement, config) => {
     hideInputError(formElement, inputElement, config);
   }
 };
+
 const hasInvalidInput = (inputList) => {
   return inputList.some((input) => {
     return !input.validity.valid;
@@ -44,11 +49,6 @@ const toggleButtonState = (inputList, buttonElement, config) => {
     buttonElement.disabled = false;
     buttonElement.classList.remove(config.inactiveButtonClass);
   }
-};
-
-const disabledButton = (buttonElement, config) => {
-  buttonElement.disabled = true;
-  buttonElement.classList.add(config.inactiveButtonClass);
 };
 
 export const resetValidation = (formElement, inputElements, config) => {
