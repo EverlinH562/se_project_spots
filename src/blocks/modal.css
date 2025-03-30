@@ -234,7 +234,6 @@
      width: 300px; 
      margin: 0 10px; 
      padding: 12px;
-     
   }
 
   .modal__container_confirm {
@@ -258,8 +257,13 @@
   }
   
   .modal__close-btn {
-   top: -40px;
-   left: 245px;
+   top: 10px;
+   left: 255px;
+  }
+
+  .modal__close-btn_confirm {
+    top: -45px;
+    right: 8px;
   }
 
   .modal__submit-btn_delete{

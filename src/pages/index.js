@@ -11,7 +11,7 @@ import {
 import unionIcon from "../images/Union.svg";
 import Api from "../utils/Api.js";
 import { setButtonText } from "../utils/helper.js";
-
+import { disabledButton } from "../scripts/validation.js";
 
 const avatarImage = document.getElementById("avatar");
 avatarImage.src = avatar;
@@ -206,25 +206,25 @@ api.getAppInfo()
         profileName.textContent = data.name;
         profileDescription.textContent = data.about;
         closeModal(editModal);
+        editFormElement.reset();
       })
       .catch((error) => {
         console.error(error);
       })
       .finally(() => {
-        profileSubmitBtn.disabled = false;
-        profileSubmitBtn.classList.remove("modal__submit-btn_disabled");
         setButtonText(profileSubmitBtn, false, "Save");
-        editFormElement.reset();
+        disabledButton(profileSubmitBtn, false); 
       });
   }
   
   function toggleSubmitButton() {
     const isInputValid = cardNameInput.value.trim() !== "" && cardLinkInput.value.trim() !== "";
-    cardSubmitBtn.disabled = !isInputValid; 
+    disabledButton(cardSubmitBtn, !isInputValid); 
   }
   
   function handleAddCardSubmit(evt) {
     evt.preventDefault();
+    disabledButton(cardSubmitBtn, true);
     setButtonText(cardSubmitBtn, true, "Save", "Saving...");
   
     const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
@@ -234,21 +234,22 @@ api.getAppInfo()
         const cardElement = getCardElement(data);
         cardsList.prepend(cardElement);
         closeModal(cardModal);
+        cardForm.reset();
       })
       .catch((error) => {
         console.error(error);
       })
       .finally(() => {
-        cardSubmitBtn.disabled = false;
-        cardSubmitBtn.classList.remove("modal__submit-btn_disabled");
         setButtonText(cardSubmitBtn, false, "Save");
-        cardForm.reset();
+        disabledButton(cardSubmitBtn, false); 
       });
   }
   
   function handleAvatarSubmit(evt) {
     evt.preventDefault();
     setButtonText(avatarSubmitBtn, true, "Save", "Saving...");
+    avatarSubmitBtn.disabled = true;
+    avatarSubmitBtn.classList.add("modal__submit-btn_disabled");
   
     api.editAvatarInfo(avatarInput.value)
       .then((data) => {
@@ -259,6 +260,8 @@ api.getAppInfo()
       .finally(() => {
         setButtonText(avatarSubmitBtn, false, "Save");
         avatarForm.reset();
+        avatarSubmitBtn.disabled = true;
+        avatarSubmitBtn.classList.add("modal__submit-btn_disabled");
       });
   }
   

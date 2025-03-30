@@ -6,10 +6,15 @@ export const settings = {
   inputErrorClass: "modal__input_state_error",
   errorClass: "modal__error",
 };
-export const disabledButton = (buttonElement, config) => {
-  buttonElement.disabled = true;
-  buttonElement.classList.add(config.inactiveButtonClass);
-};
+export function disabledButton(button, disabled) {
+  if (disabled) {
+    button.disabled = true;
+    button.classList.add('modal__submit-btn_disabled');
+  } else {
+    button.disabled = false;
+    button.classList.remove('modal__submit-btn_disabled');
+  }
+}
 
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorMessageEl = formElement.querySelector(`#${inputElement.id}-error`);
