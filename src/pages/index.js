@@ -224,7 +224,7 @@ api.getAppInfo()
   
   function handleAddCardSubmit(evt) {
     evt.preventDefault();
-    disabledButton(cardSubmitBtn, true);
+    disabledButton(cardSubmitBtn, true); 
     setButtonText(cardSubmitBtn, true, "Save", "Saving...");
   
     const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
@@ -240,8 +240,8 @@ api.getAppInfo()
         console.error(error);
       })
       .finally(() => {
-        setButtonText(cardSubmitBtn, false, "Save");
-        disabledButton(cardSubmitBtn, false); 
+        setButtonText(cardSubmitBtn, false, "Save"); 
+        disabledButton(cardSubmitBtn, false);  
       });
   }
   
@@ -255,16 +255,20 @@ api.getAppInfo()
       .then((data) => {
         avatarImage.src = data.avatar;
         closeModal(avatarModal);
+        avatarForm.reset();
+        disabledButton(avatarSubmitBtn, settings);  
       })
-      .catch(console.error)
+      .catch((error) => {
+        console.error(error);
+      })
       .finally(() => {
         setButtonText(avatarSubmitBtn, false, "Save");
-        avatarForm.reset();
-        avatarSubmitBtn.disabled = true;
+        disabledButton(avatarSubmitBtn, true);
         avatarSubmitBtn.classList.add("modal__submit-btn_disabled");
       });
   }
-  
+
+
   function closeOnOverlayClick(modal) {
     modal.addEventListener("click", (evt) => {
       if (evt.target === modal) {
