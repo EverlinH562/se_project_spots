@@ -165,8 +165,7 @@ api.getAppInfo()
   
     cardDeleteBtn.addEventListener("click", () => 
       handleDeleteCard(cardElement, data._id, cardDeleteBtn));
-  
-    return cardElement;
+      return cardElement;
   }
   
   function handleDeleteCard(cardElement, cardId, cardDeleteBtn) {
@@ -207,13 +206,13 @@ api.getAppInfo()
         profileDescription.textContent = data.about;
         closeModal(editModal);
         editFormElement.reset();
+        disabledButton(profileSubmitBtn, false); 
       })
       .catch((error) => {
         console.error(error);
       })
       .finally(() => {
         setButtonText(profileSubmitBtn, false, "Save");
-        disabledButton(profileSubmitBtn, false); 
       });
   }
   
@@ -235,13 +234,14 @@ api.getAppInfo()
         cardsList.prepend(cardElement);
         closeModal(cardModal);
         cardForm.reset();
+        disabledButton(cardSubmitBtn, false);
+        cardSubmitBtn.classList.add("modal__submit-btn_disabled"); 
       })
       .catch((error) => {
         console.error(error);
       })
       .finally(() => {
         setButtonText(cardSubmitBtn, false, "Save"); 
-        disabledButton(cardSubmitBtn, false);  
       });
   }
   
@@ -256,18 +256,17 @@ api.getAppInfo()
         avatarImage.src = data.avatar;
         closeModal(avatarModal);
         avatarForm.reset();
-        disabledButton(avatarSubmitBtn, settings);  
+        disabledButton(avatarSubmitBtn, settings); 
+        disabledButton(avatarSubmitBtn, true);
+        avatarSubmitBtn.classList.add("modal__submit-btn_disabled");
       })
       .catch((error) => {
         console.error(error);
       })
       .finally(() => {
         setButtonText(avatarSubmitBtn, false, "Save");
-        disabledButton(avatarSubmitBtn, true);
-        avatarSubmitBtn.classList.add("modal__submit-btn_disabled");
       });
   }
-
 
   function closeOnOverlayClick(modal) {
     modal.addEventListener("click", (evt) => {
@@ -314,12 +313,9 @@ api.getAppInfo()
     closeModal(editModal);
   });
   
-  cardModalBtn.addEventListener("click", () => {
-    cardForm.reset();
-    cardSubmitBtn.disabled = true; 
-    cardSubmitBtn.classList.add("modal__submit-btn_disabled"); 
-    openModal(cardModal);
-  });
+cardModalBtn.addEventListener("click", () => {
+  openModal(cardModal);
+});
   
   cardModalCloseBtn.addEventListener("click", () => {
     closeModal(cardModal);
