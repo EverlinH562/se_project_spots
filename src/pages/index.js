@@ -206,7 +206,7 @@ api.getAppInfo()
         profileDescription.textContent = data.about;
         closeModal(editModal);
         editFormElement.reset();
-        disabledButton(profileSubmitBtn, false); 
+        disabledButton(profileSubmitBtn, settings); 
       })
       .catch((error) => {
         console.error(error);
@@ -223,7 +223,7 @@ api.getAppInfo()
   
   function handleAddCardSubmit(evt) {
     evt.preventDefault();
-    disabledButton(cardSubmitBtn, true); 
+    disabledButton(cardSubmitBtn, settings); 
     setButtonText(cardSubmitBtn, true, "Save", "Saving...");
   
     const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
@@ -234,7 +234,7 @@ api.getAppInfo()
         cardsList.prepend(cardElement);
         closeModal(cardModal);
         cardForm.reset();
-        disabledButton(cardSubmitBtn, false);
+        disabledButton(cardSubmitBtn, settings);
         cardSubmitBtn.classList.add("modal__submit-btn_disabled"); 
       })
       .catch((error) => {
@@ -257,7 +257,6 @@ api.getAppInfo()
         closeModal(avatarModal);
         avatarForm.reset();
         disabledButton(avatarSubmitBtn, settings); 
-        disabledButton(avatarSubmitBtn, true);
         avatarSubmitBtn.classList.add("modal__submit-btn_disabled");
       })
       .catch((error) => {
